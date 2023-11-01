@@ -1,4 +1,4 @@
-# BelousLib.GuidExtension
+﻿# BelousLib.GuidExtension
 This library helps convert GUIDs to integers and vice versa
 
 ```csharp

@@ -1,0 +1,50 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+
+    <IsPackable>true</IsPackable>
+
+    <PackageId>BelousLib.GuidExtension</PackageId>
+    <Version>1.0.0</Version>
+    <Authors>Denis Belous</Authors>
+    <Description>This library helps convert GUIDs to integers and vice versa</Description>
+    <PackageProjectUrl>https://github.com/dbelouslv/BelousLib.GuidExtension</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/dbelouslv/BelousLib.GuidExtension</RepositoryUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageTags>dotnet guid 1.0.0</PackageTags>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageReleaseNotes>
+      - Added the ability to convert from GUID to UInt16
+      - Added the ability to convert from GUID to UInt32
+      - Added the ability to convert from GUID to UInt64
+      - Added the ability to convert from GUID to Int16
+      - Added the ability to convert from GUID to Int32
+      - Added the ability to convert from GUID to Int64
+      - Added the ability to convert from UInt16 to GUID
+      - Added the ability to convert from UInt32 to GUID
+      - Added the ability to convert from UInt64 to GUID
+      - Added the ability to convert from Int16 to GUID
+      - Added the ability to convert from Int32 to GUID
+      - Added the ability to convert from Int64 to GUID
+    </PackageReleaseNotes>
+
+    <AnalysisLevel>latest-all</AnalysisLevel>
+    <Title>$(AssemblyName)</Title>
+    <Company></Company>
+    <Copyright></Copyright>
+    <DebugType>embedded</DebugType>
+    <AssemblyVersion>1.0.0</AssemblyVersion>
+    <FileVersion>$(AssemblyVersion)</FileVersion>
+    <Version>$(AssemblyVersion)</Version>
+
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="docs\README.md" Pack="true" PackagePath="\"/>
+  </ItemGroup>
+
+</Project>
