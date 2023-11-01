@@ -28,7 +28,7 @@
     <Company></Company>
     <Copyright></Copyright>
     <DebugType>embedded</DebugType>
-    <AssemblyVersion>1.0.0</AssemblyVersion>
+    <AssemblyVersion>1.0.1</AssemblyVersion>
     <FileVersion>$(AssemblyVersion)</FileVersion>
     <Version>$(AssemblyVersion)</Version>
 

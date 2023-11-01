@@ -22,7 +22,8 @@ namespace Example
     }
 }
 ```
-<h1 align="center">Where can I use it?</h1>
+
+## Where can I use it?
 
 - For example, in a database, instead of using a **GUID** as the primary key, which occupies 16 bytes, you can use **int** or **long**, which occupy 4 and 8 bytes respectively. However, when displaying data to the user, you can convert **int/long** to a **GUID**. This means that you've implemented the logic with **GUIDs** and saved memory.
   
