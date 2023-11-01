@@ -17,8 +17,11 @@
     <PackageTags>dotnet guid extension</PackageTags>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageReleaseNotes>
-		- Added a new method ToStringWithoutDashes
-	</PackageReleaseNotes>
+      - Added a new method ToStringWithoutDashes
+      - Updated README.md file
+      - Fixed warnings with main extension
+      - Added a new unit test
+    </PackageReleaseNotes>
 
     <AnalysisLevel>latest-all</AnalysisLevel>
     <Title>$(AssemblyName)</Title>

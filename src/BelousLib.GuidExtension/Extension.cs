@@ -23,7 +23,7 @@ public static class Extension
     /// <summary>
     ///     Convert GUID to Int32
     /// </summary>
-    /// <param name="guid">GUID</param>
+    /// <param name="entityGuid">GUID</param>
     public static int ToInt32(this Guid entityGuid)
     {
         return BitConverter.ToInt32(GetByteArrayFromHexString(entityGuid));
@@ -157,6 +157,7 @@ public static class Extension
     /// </returns>
     private static byte[] GetByteArrayFromHexString(Guid guid)
     {
-        return Convert.FromHexString(guid.ToString().Replace(Dash.ToString(), string.Empty, StringComparison.CurrentCulture));
+        return Convert.FromHexString(guid.ToString()
+            .Replace(Dash.ToString(), string.Empty, StringComparison.CurrentCulture));
     }
 }

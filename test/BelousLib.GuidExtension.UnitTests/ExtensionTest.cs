@@ -39,7 +39,7 @@ public class ExtensionTest
         Assert.Equal(long.MinValue, long.MinValue.ToGuid().ToInt64());
         Assert.Equal(long.MaxValue, long.MaxValue.ToGuid().ToInt64());
     }
-    
+
     [Fact]
     public void RandomGuidTest()
     {
@@ -49,6 +49,7 @@ public class ExtensionTest
     [Fact]
     public void GuidStringWithoutDashesTest()
     {
-        Assert.Equal("6748db38b5fd40c18066c0a0f1733377", new Guid("6748db38-b5fd-40c1-8066-c0a0f1733377").ToStringWithoutDashes());
+        Assert.Equal("6748db38b5fd40c18066c0a0f1733377",
+            new Guid("6748db38-b5fd-40c1-8066-c0a0f1733377").ToStringWithoutDashes());
     }
 }
