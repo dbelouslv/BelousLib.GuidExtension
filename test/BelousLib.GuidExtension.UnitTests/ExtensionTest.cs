@@ -50,6 +50,6 @@ public class ExtensionTest
     public void GuidStringWithoutDashesTest()
     {
         Assert.Equal("6748db38b5fd40c18066c0a0f1733377",
-            new Guid("6748db38-b5fd-40c1-8066-c0a0f1733377").ToStringWithoutDashes());
+            new Guid("6748db38-b5fd-40c1-8066-c0a0f1733377").ToStringFromGuid());
     }
 }
