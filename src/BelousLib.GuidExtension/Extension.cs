@@ -5,6 +5,12 @@
 /// </summary>
 public static class Extension
 {
+    private const int LastGuidDigitIndex = 15;
+
+    private const string Dash = "-";
+
+    private const string Hex = "0123456789ABCDEF";
+
     /// <summary>
     ///     Convert GUID to Int16
     /// </summary>
@@ -78,7 +84,7 @@ public static class Extension
     }
 
     /// <summary>
-    ///     Convert GUID to String without dashes
+    ///     Convert GUID to String
     /// </summary>
     /// <param name="entityGuid">GUID</param>
     public static string ToStringFromGuid(this Guid entityGuid)
@@ -87,75 +93,92 @@ public static class Extension
     }
 
     /// <summary>
+    ///     Convert GUID to String without dashes
+    /// </summary>
+    /// <param name="entityGuid">GUID</param>
+    public static string ToStringFromGuidWithoutDashes(this Guid entityGuid)
+    {
+        return entityGuid.ToString().Replace(Dash, string.Empty, StringComparison.CurrentCulture);
+    }
+
+    /// <summary>
     ///     Convert Int16 to GUID
     /// </summary>
     /// <param name="value">Int16</param>
-    public static Guid ToGuid(this short value)
+    /// <param name="enableZeroRemoving">Enable Zero Removing</param>
+    public static Guid ToGuid(this short value, bool enableZeroRemoving = false)
     {
-        return CreateGuid(BitConverter.GetBytes(value));
+        return CreateGuid(BitConverter.GetBytes(value), enableZeroRemoving);
     }
 
     /// <summary>
     ///     Convert Int32 to GUID
     /// </summary>
     /// <param name="value">Int32</param>
-    public static Guid ToGuid(this int value)
+    /// <param name="enableZeroRemoving">Enable Zero Removing</param>
+    public static Guid ToGuid(this int value, bool enableZeroRemoving = false)
     {
-        return CreateGuid(BitConverter.GetBytes(value));
+        return CreateGuid(BitConverter.GetBytes(value), enableZeroRemoving);
     }
 
     /// <summary>
     ///     Convert Int64 to GUID
     /// </summary>
     /// <param name="value">Int64</param>
-    public static Guid ToGuid(this long value)
+    /// <param name="enableZeroRemoving">Enable Zero Removing</param>
+    public static Guid ToGuid(this long value, bool enableZeroRemoving = false)
     {
-        return CreateGuid(BitConverter.GetBytes(value));
+        return CreateGuid(BitConverter.GetBytes(value), enableZeroRemoving);
     }
 
     /// <summary>
     ///     Convert UInt16 to GUID
     /// </summary>
     /// <param name="value">UInt16</param>
-    public static Guid ToGuid(this ushort value)
+    /// <param name="enableZeroRemoving">Enable Zero Removing</param>
+    public static Guid ToGuid(this ushort value, bool enableZeroRemoving = false)
     {
-        return CreateGuid(BitConverter.GetBytes(value));
+        return CreateGuid(BitConverter.GetBytes(value), enableZeroRemoving);
     }
 
     /// <summary>
     ///     Convert UInt32 to GUID
     /// </summary>
     /// <param name="value">UInt32</param>
-    public static Guid ToGuid(this uint value)
+    /// <param name="enableZeroRemoving">Enable Zero Removing</param>
+    public static Guid ToGuid(this uint value, bool enableZeroRemoving = false)
     {
-        return CreateGuid(BitConverter.GetBytes(value));
+        return CreateGuid(BitConverter.GetBytes(value), enableZeroRemoving);
     }
 
     /// <summary>
     ///     Convert UInt64 to GUID
     /// </summary>
     /// <param name="value">UInt64</param>
-    public static Guid ToGuid(this ulong value)
+    /// <param name="enableZeroRemoving">Enable Zero Removing</param>
+    public static Guid ToGuid(this ulong value, bool enableZeroRemoving = false)
     {
-        return CreateGuid(BitConverter.GetBytes(value));
+        return CreateGuid(BitConverter.GetBytes(value), enableZeroRemoving);
     }
 
     /// <summary>
     ///     Convert Float to GUID
     /// </summary>
     /// <param name="value">Float</param>
-    public static Guid ToGuid(this float value)
+    /// <param name="enableZeroRemoving">Enable Zero Removing</param>
+    public static Guid ToGuid(this float value, bool enableZeroRemoving = false)
     {
-        return CreateGuid(BitConverter.GetBytes(value));
+        return CreateGuid(BitConverter.GetBytes(value), enableZeroRemoving);
     }
 
     /// <summary>
     ///     Convert Double to GUID
     /// </summary>
     /// <param name="value">Double</param>
-    public static Guid ToGuid(this double value)
+    /// <param name="enableZeroRemoving">Enable Zero Removing</param>
+    public static Guid ToGuid(this double value, bool enableZeroRemoving = false)
     {
-        return CreateGuid(BitConverter.GetBytes(value));
+        return CreateGuid(BitConverter.GetBytes(value), enableZeroRemoving);
     }
 
     /// <summary>
@@ -167,13 +190,39 @@ public static class Extension
         return CreateGuid(new Guid(value).ToByteArray());
     }
 
-    private static Guid CreateGuid(byte[] byteArray)
+    /// <summary>
+    ///     Create a GUID
+    /// </summary>
+    /// <param name="byteArray">Byte array</param>
+    /// <param name="enableZeroRemoving">Flag to enable zero removing</param>
+    private static Guid CreateGuid(byte[] byteArray, bool enableZeroRemoving = false)
     {
         // Initialize the remaining bytes of the Guid with zeros
         var guidBytes = new byte[16];
 
         Array.Copy(byteArray, guidBytes, byteArray.Length);
 
-        return new Guid(guidBytes);
+        return !enableZeroRemoving ? new Guid(guidBytes) : FillGuid(new Guid(guidBytes));
     }
+
+    /// <summary>
+    ///     Fill guid
+    /// </summary>
+    /// <param name="newGuid">GUID</param>
+    private static Guid FillGuid(Guid newGuid)
+    {
+        var charArray = newGuid.ToStringFromGuidWithoutDashes().ToCharArray();
+
+        for (var index = LastGuidDigitIndex; index < charArray.Length; index++)
+        {
+            charArray[index] = GetRandomHexDigit();
+        }
+
+        return new Guid(new string(charArray));
+    }
+
+    /// <summary>
+    ///     Return a random value from HEX
+    /// </summary>
+    private static char GetRandomHexDigit() => Hex[new Random().Next(16)];
 }
