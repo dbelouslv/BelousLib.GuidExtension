@@ -15,12 +15,16 @@
     <RepositoryUrl>https://github.com/dbelouslv/BelousLib.GuidExtension</RepositoryUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageTags>dotnet guid extension</PackageTags>
-    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageReadmeFile>NUGET.md</PackageReadmeFile>
     <PackageReleaseNotes>
-      - Added a new method ToStringWithoutDashes
+      - Rewrited the library main logic
       - Updated README.md file
-      - Fixed warnings with main extension
-      - Added a new unit test
+      - Added new unit tests
+      - Added the ability to convert from Double to GUID
+      - Added the ability to convert from Float to GUID
+      - Added the ability to convert from GUID to Float
+      - Added the ability to convert from GUID to Double
+      - Added the ability tp fill guid second part with random HEX-sybmols
     </PackageReleaseNotes>
 
     <AnalysisLevel>latest-all</AnalysisLevel>
@@ -36,7 +40,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="docs\README.md" Pack="true" PackagePath="\" />
+    <None Include="docs\NUGET.md" Pack="true" PackagePath="\" />
   </ItemGroup>
 
 </Project>

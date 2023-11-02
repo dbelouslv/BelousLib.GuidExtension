@@ -213,7 +213,7 @@ public static class Extension
     {
         var charArray = newGuid.ToStringFromGuidWithoutDashes().ToCharArray();
 
-        for (var index = LastGuidDigitIndex; index < charArray.Length; index++)
+        for (var index = LastGuidDigitIndex + 1; index < charArray.Length; index++)
         {
             charArray[index] = GetRandomHexDigit();
         }

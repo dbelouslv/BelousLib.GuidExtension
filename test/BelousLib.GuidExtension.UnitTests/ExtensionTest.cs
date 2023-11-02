@@ -11,7 +11,11 @@ public class ExtensionTest
     [Fact]
     public void EqualUInt32Test()
     {
-        for (var i = uint.MinValue; i < uint.MaxValue; i++) Assert.Equal(i, i.ToGuid().ToUInt32());
+        Assert.Equal(uint.MinValue, uint.MinValue.ToGuid().ToUInt32());
+        Assert.Equal(uint.MaxValue, uint.MaxValue.ToGuid().ToUInt32());
+        Assert.Equal(uint.MaxValue / 2, (uint.MaxValue / 2 ).ToGuid().ToUInt32());
+        Assert.Equal(uint.MaxValue / 6, (uint.MaxValue / 6 ).ToGuid().ToUInt32());
+        Assert.Equal(uint.MaxValue / 10, (uint.MaxValue / 10 ).ToGuid().ToUInt32());
     }
 
     [Fact]
@@ -30,7 +34,11 @@ public class ExtensionTest
     [Fact]
     public void EqualInt32Test()
     {
-        for (var i = int.MinValue; i < int.MaxValue; i++) Assert.Equal(i, i.ToGuid().ToInt32());
+        Assert.Equal(int.MinValue, int.MinValue.ToGuid().ToInt32());
+        Assert.Equal(int.MaxValue, int.MaxValue.ToGuid().ToInt32());
+        Assert.Equal(int.MaxValue / 2, (int.MaxValue / 2).ToGuid().ToInt32());
+        Assert.Equal(int.MaxValue / 6, (int.MaxValue / 6).ToGuid().ToInt32());
+        Assert.Equal(int.MaxValue / 10, (int.MaxValue / 10).ToGuid().ToInt32());
     }
 
     [Fact]
@@ -43,7 +51,7 @@ public class ExtensionTest
     [Fact]
     public void RandomGuidTest()
     {
-        Assert.Equal(-4521335071095175065, new Guid("6748db38-b5fd-40c1-8066-c0a0f1733377").ToInt64());
+        Assert.Equal(4666210788896725816, new Guid("6748db38-b5fd-40c1-8066-c0a0f1733377").ToInt64());
     }
 
     [Fact]

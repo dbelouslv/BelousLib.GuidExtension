@@ -1,5 +1,5 @@
 # BelousLib.GuidExtension
-This library helps convert **GUIDs** to **int/long/short** and vice versa
+This library helps convert **GUIDs** to **int/long/short/double/float** and vice versa
 
 ```csharp
 using BelousLib.GuidExtension;
@@ -10,19 +10,24 @@ namespace Example
     {
         private static void Main()
         {
-            //Output 36864
+            //Output 9437184
             Console.WriteLine(new Guid("00900000-0000-0000-0000-000000000000").ToInt32());
 
-            //Output a7010000-0000-0000-0000-000000000000
+            //Output 000001a7-0000-0000-0000-000000000000
             Console.WriteLine(423.ToGuid());
 
+            //Output 000001a7-0000-0000-7cfe-ccc22d685ef2
+            Console.WriteLine(423.ToGuid(true));
+
+            //Output 8f084620-b454-40dc-0000-000000000000
+            Console.WriteLine(29393.32123.ToGuid());
+
             //Output 6748db38b5fd40c18066c0a0f1733377
-            Console.WriteLine(new Guid("6748db38-b5fd-40c1-8066-c0a0f1733377").ToStringWithoutDashes());
+            Console.WriteLine(new Guid("6748db38-b5fd-40c1-8066-c0a0f1733377").ToStringFromGuidWithoutDashes());
         }
     }
 }
 ```
-
 ## Where can I use it?
 
 - For example, in a database, instead of using a **GUID** as the primary key, which occupies 16 bytes, you can use **int** or **long**, which occupy 4 and 8 bytes respectively. However, when displaying data to the user, you can convert **int/long** to a **GUID**. This means that you've implemented the logic with **GUIDs** and saved memory.
@@ -40,3 +45,16 @@ namespace Example
   **Before**: `/user?userId=1&teamId=59`
   
   **After**: `/user?userId=01000000-0000-0000-0000-000000000000&teamId=3b000000-0000-0000-0000-000000000000`
+  
+  
+## Warning
+
+Please note that when converting, only the first 16 characters of the GUID are filled with data, while the remaining values are left as zeros. Since it doesn't matter what will be in their place, the 'enableZeroRemoving' flag was added to replace the zeros with any HEX values.
+
+```csharp
+  //Output 6748db38-b5fd-40c1-5a66-8f6a0e5c1c0b
+  var withFlag = 4666210788896725816.ToGuid(true);
+
+  //Output 6748db38-b5fd-40c1-0000-000000000000
+  var withOutFlag = 4666210788896725816.ToGuid();
+```
