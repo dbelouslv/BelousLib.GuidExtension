@@ -40,16 +40,16 @@ namespace Example
   cfg.CreateMap<UserDto, User>()
     .ForMember(d => d.Id, o => o.MapFrom(s => s.Id.ToInt32()));
   ```
-- If you don't want to display the identifiers of your entities, you can use this library as a form of **"encryption"** method.
+- If you don't want to display the identifiers of your entities, you can use this library as a form of **"encryption"** method. Below you can see example with using a **enableZeroRemoving** flag
 
   **Before**: `/user?userId=1&teamId=59`
   
-  **After**: `/user?userId=01000000-0000-0000-0000-000000000000&teamId=3b000000-0000-0000-0000-000000000000`
+  **After**: `/user?userId=00000001-0000-0000-ed5c-1a8fcef14830&teamId=0000003b-0000-0000-6546-65a55278fe74`
   
   
-## Warning
+## Important
 
-Please note that when converting, only the first 16 characters of the GUID are filled with data, while the remaining values are left as zeros. Since it doesn't matter what will be in their place, the 'enableZeroRemoving' flag was added to replace the zeros with any HEX values.
+Please note that when converting, only the first 16 characters of the GUID are filled with data, while the remaining values are left as zeros. Since it doesn't matter what will be in their place, the **enableZeroRemoving** flag was added to replace the zeros with any HEX values.
 
 ```csharp
   //Output 6748db38-b5fd-40c1-5a66-8f6a0e5c1c0b
