@@ -1,14 +1,14 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
 
     <IsPackable>true</IsPackable>
 
     <PackageId>BelousLib.GuidExtension</PackageId>
-    <Version>1.0.2</Version>
+    <Version>2.0.0</Version>
     <Authors>Denis Belous</Authors>
     <Description>This library helps convert GUIDs to int/long/short/float/double and vice versa</Description>
     <PackageProjectUrl>https://github.com/dbelouslv/BelousLib.GuidExtension</PackageProjectUrl>
@@ -17,16 +17,9 @@
     <PackageTags>dotnet guid extension</PackageTags>
     <PackageReadmeFile>NUGET.md</PackageReadmeFile>
     <PackageReleaseNotes>
-      This is the release notes for version 1.0.2:
+      This is the release notes for version 2.0.0:
 
-      - Rewrited the library main logic
-      - Updated README.md file
-      - Added new unit tests
-      - Added the ability to convert from Double to GUID
-      - Added the ability to convert from Float to GUID
-      - Added the ability to convert from GUID to Float
-      - Added the ability to convert from GUID to Double
-      - Added the ability tp fill guid second part with random HEX-sybmols
+      - Upgraded to .NET8
     </PackageReleaseNotes>
 
     <AnalysisLevel>latest-all</AnalysisLevel>
@@ -34,7 +27,7 @@
     <Company></Company>
     <Copyright></Copyright>
     <DebugType>embedded</DebugType>
-    <AssemblyVersion>1.0.2</AssemblyVersion>
+    <AssemblyVersion>2.0.0</AssemblyVersion>
     <FileVersion>$(AssemblyVersion)</FileVersion>
     <Version>$(AssemblyVersion)</Version>
 
