@@ -21,12 +21,30 @@ public static class Extension
     }
 
     /// <summary>
+    ///     Convert IEnumerable GUID to IEnumerable Int16
+    /// </summary>
+    /// <param name="guids">GUIDs</param>
+    public static IEnumerable<short> ToInt16(this IEnumerable<Guid> guids)
+    {
+        return guids.Select(ToInt16);
+    }
+
+    /// <summary>
     ///     Convert GUID? to Int16?
     /// </summary>
     /// <param name="entityGuid">GUID</param>
     public static short? ToInt16(this Guid? entityGuid)
     {
         return entityGuid.HasValue ? BitConverter.ToInt16(entityGuid.Value.ToByteArray()) : null;
+    }
+
+    /// <summary>
+    ///     Convert IEnumerable GUID? to IEnumerable Int16?
+    /// </summary>
+    /// <param name="guids">GUIDs</param>
+    public static IEnumerable<short?> ToInt16(this IEnumerable<Guid?> guids)
+    {
+        return guids.Select(ToInt16);
     }
 
     /// <summary>
@@ -39,12 +57,30 @@ public static class Extension
     }
 
     /// <summary>
+    ///     Convert IEnumerable GUID to IEnumerable Int32
+    /// </summary>
+    /// <param name="guids">GUIDs</param>
+    public static IEnumerable<int> ToInt32(this IEnumerable<Guid> guids)
+    {
+        return guids.Select(ToInt32);
+    }
+
+    /// <summary>
     ///     Convert GUID? to Int32?
     /// </summary>
     /// <param name="entityGuid">GUID</param>
     public static int? ToInt32(this Guid? entityGuid)
     {
         return entityGuid.HasValue ? BitConverter.ToInt32(entityGuid.Value.ToByteArray()) : null;
+    }
+
+    /// <summary>
+    ///     Convert IEnumerable GUID? to IEnumerable Int32?
+    /// </summary>
+    /// <param name="guids">GUIDs</param>
+    public static IEnumerable<int?> ToInt32(this IEnumerable<Guid?> guids)
+    {
+        return guids.Select(ToInt32);
     }
 
     /// <summary>
@@ -55,7 +91,16 @@ public static class Extension
     {
         return BitConverter.ToInt64(entityGuid.ToByteArray());
     }
-    
+
+    /// <summary>
+    ///     Convert IEnumerable GUID to IEnumerable Int64
+    /// </summary>
+    /// <param name="guids">GUID</param>
+    public static IEnumerable<long> ToInt64(this IEnumerable<Guid> guids)
+    {
+        return guids.Select(ToInt64);
+    }
+
     /// <summary>
     ///     Convert GUID? to Int64?
     /// </summary>
@@ -66,6 +111,15 @@ public static class Extension
     }
 
     /// <summary>
+    ///     Convert IEnumerable GUID? to IEnumerable Int64?
+    /// </summary>
+    /// <param name="guids">GUID</param>
+    public static IEnumerable<long?> ToInt64(this IEnumerable<Guid?> guids)
+    {
+        return guids.Select(ToInt64);
+    }
+
+    /// <summary>
     ///     Convert GUID to UInt16
     /// </summary>
     /// <param name="entityGuid">GUID</param>
@@ -73,7 +127,16 @@ public static class Extension
     {
         return BitConverter.ToUInt16(entityGuid.ToByteArray());
     }
-    
+
+    /// <summary>
+    ///     Convert IEnumerable GUID to IEnumerable UInt16
+    /// </summary>
+    /// <param name="guids">GUIDs</param>
+    public static IEnumerable<ushort> ToUInt16(this IEnumerable<Guid> guids)
+    {
+        return guids.Select(ToUInt16);
+    }
+
     /// <summary>
     ///     Convert GUID? to UInt16?
     /// </summary>
@@ -84,6 +147,15 @@ public static class Extension
     }
 
     /// <summary>
+    ///     Convert IEnumerable GUID? to IEnumerable UInt16?
+    /// </summary>
+    /// <param name="guids">GUIDs</param>
+    public static IEnumerable<ushort?> ToUInt16(this IEnumerable<Guid?> guids)
+    {
+        return guids.Select(ToUInt16);
+    }
+
+    /// <summary>
     ///     Convert GUID to UInt32
     /// </summary>
     /// <param name="entityGuid">GUID</param>
@@ -91,7 +163,16 @@ public static class Extension
     {
         return BitConverter.ToUInt32(entityGuid.ToByteArray());
     }
-    
+
+    /// <summary>
+    ///     Convert IEnumerable GUID to IEnumerable UInt32
+    /// </summary>
+    /// <param name="guids">GUIDs</param>
+    public static IEnumerable<uint> ToUInt32(this IEnumerable<Guid> guids)
+    {
+        return guids.Select(ToUInt32);
+    }
+
     /// <summary>
     ///     Convert GUID? to UInt32?
     /// </summary>
@@ -102,6 +183,15 @@ public static class Extension
     }
 
     /// <summary>
+    ///     Convert IEnumerable GUID? to IEnumerable UInt32?
+    /// </summary>
+    /// <param name="guids">GUIDs</param>
+    public static IEnumerable<uint?> ToUInt32(this IEnumerable<Guid?> guids)
+    {
+        return guids.Select(ToUInt32);
+    }
+
+    /// <summary>
     ///     Convert GUID to UInt64
     /// </summary>
     /// <param name="entityGuid">GUID</param>
@@ -109,7 +199,16 @@ public static class Extension
     {
         return BitConverter.ToUInt64(entityGuid.ToByteArray());
     }
-    
+
+    /// <summary>
+    ///     Convert IEnumerable GUID to IEnumerable UInt64
+    /// </summary>
+    /// <param name="guids">GUIDs</param>
+    public static IEnumerable<ulong> ToUInt64(this IEnumerable<Guid> guids)
+    {
+        return guids.Select(ToUInt64);
+    }
+
     /// <summary>
     ///     Convert GUID? to UInt64?
     /// </summary>
@@ -120,6 +219,15 @@ public static class Extension
     }
 
     /// <summary>
+    ///     Convert IEnumerable GUID? to IEnumerable UInt64?
+    /// </summary>
+    /// <param name="guids">GUIDs</param>
+    public static IEnumerable<ulong?> ToUInt64(this IEnumerable<Guid?> guids)
+    {
+        return guids.Select(ToUInt64);
+    }
+
+    /// <summary>
     ///     Convert GUID to Float
     /// </summary>
     /// <param name="entityGuid">GUID</param>
@@ -127,7 +235,16 @@ public static class Extension
     {
         return BitConverter.ToSingle(entityGuid.ToByteArray());
     }
-    
+
+    /// <summary>
+    ///     Convert IEnumerable GUID to IEnumerable Float
+    /// </summary>
+    /// <param name="guids">GUID</param>
+    public static IEnumerable<float> ToSingle(this IEnumerable<Guid> guids)
+    {
+        return guids.Select(ToSingle);
+    }
+
     /// <summary>
     ///     Convert GUID? to Float?
     /// </summary>
@@ -138,6 +255,15 @@ public static class Extension
     }
 
     /// <summary>
+    ///     Convert IEnumerable GUID? to IEnumerable Float?
+    /// </summary>
+    /// <param name="guids">GUIDs</param>
+    public static IEnumerable<float?> ToSingle(this IEnumerable<Guid?> guids)
+    {
+        return guids.Select(ToSingle);
+    }
+
+    /// <summary>
     ///     Convert GUID to Double
     /// </summary>
     /// <param name="entityGuid">GUID</param>
@@ -145,7 +271,16 @@ public static class Extension
     {
         return BitConverter.ToDouble(entityGuid.ToByteArray());
     }
-    
+
+    /// <summary>
+    ///     Convert IEnumerable GUID to IEnumerable Double
+    /// </summary>
+    /// <param name="guids">GUIDs</param>
+    public static IEnumerable<double> ToDouble(this IEnumerable<Guid> guids)
+    {
+        return guids.Select(ToDouble);
+    }
+
     /// <summary>
     ///     Convert GUID? to Double?
     /// </summary>
@@ -156,6 +291,15 @@ public static class Extension
     }
 
     /// <summary>
+    ///     Convert IEnumerable GUID? to IEnumerable Double?
+    /// </summary>
+    /// <param name="guids">GUIDs</param>
+    public static IEnumerable<double?> ToDouble(this IEnumerable<Guid?> guids)
+    {
+        return guids.Select(ToDouble);
+    }
+
+    /// <summary>
     ///     Convert GUID to String
     /// </summary>
     /// <param name="entityGuid">GUID</param>
@@ -163,7 +307,16 @@ public static class Extension
     {
         return entityGuid.ToString();
     }
-    
+
+    /// <summary>
+    ///     Convert IEnumerable GUID to IEnumerable String
+    /// </summary>
+    /// <param name="guids">GUIDs</param>
+    public static IEnumerable<string> ToStringFromGuid(this IEnumerable<Guid> guids)
+    {
+        return guids.Select(ToStringFromGuid);
+    }
+
     /// <summary>
     ///     Convert GUID? to String?
     /// </summary>
@@ -174,6 +327,15 @@ public static class Extension
     }
 
     /// <summary>
+    ///     Convert IEnumerable GUID? to IEnumerable String?
+    /// </summary>
+    /// <param name="guids">GUIDs</param>
+    public static IEnumerable<string?> ToStringFromGuid(this IEnumerable<Guid?> guids)
+    {
+        return guids.Select(ToStringFromGuid);
+    }
+
+    /// <summary>
     ///     Convert GUID to String without dashes
     /// </summary>
     /// <param name="entityGuid">GUID</param>
@@ -181,7 +343,16 @@ public static class Extension
     {
         return entityGuid.ToString().Replace(Dash, string.Empty, StringComparison.CurrentCulture);
     }
-    
+
+    /// <summary>
+    ///     Convert IEnumerable GUID to IEnumerable String without dashes
+    /// </summary>
+    /// <param name="guids">GUIDs</param>
+    public static IEnumerable<string> ToStringFromGuidWithoutDashes(this IEnumerable<Guid> guids)
+    {
+        return guids.Select(ToStringFromGuidWithoutDashes);
+    }
+
     /// <summary>
     ///     Convert GUID? to String? without dashes
     /// </summary>
@@ -189,6 +360,15 @@ public static class Extension
     public static string? ToStringFromGuidWithoutDashes(this Guid? entityGuid)
     {
         return entityGuid.HasValue ? entityGuid.Value.ToString().Replace(Dash, string.Empty, StringComparison.CurrentCulture) : null;
+    }
+
+    /// <summary>
+    ///     Convert IEnumerable GUID? to IEnumerable String? without dashes
+    /// </summary>
+    /// <param name="guids">GUIDs</param>
+    public static IEnumerable<string?> ToStringFromGuidWithoutDashes(this IEnumerable<Guid?> guids)
+    {
+        return guids.Select(ToStringFromGuidWithoutDashes);
     }
 
     /// <summary>
@@ -200,7 +380,17 @@ public static class Extension
     {
         return CreateGuid(BitConverter.GetBytes(value), enableZeroRemoving);
     }
-    
+
+    /// <summary>
+    ///     Convert IEnumerable Int16 to IEnumerable GUID
+    /// </summary>
+    /// <param name="values">Int16</param>
+    /// <param name="enableZeroRemoving">Enable Zero Removing</param>
+    public static IEnumerable<Guid> ToGuid(this IEnumerable<short> values, bool enableZeroRemoving = false)
+    {
+        return values.Select(value => value.ToGuid(enableZeroRemoving));
+    }
+
     /// <summary>
     ///     Convert Int16? to GUID?
     /// </summary>
@@ -212,6 +402,16 @@ public static class Extension
     }
 
     /// <summary>
+    ///     Convert IEnumerable Int16? to IEnumerable GUID?
+    /// </summary>
+    /// <param name="values">Int16</param>
+    /// <param name="enableZeroRemoving">Enable Zero Removing</param>
+    public static IEnumerable<Guid?> ToGuid(this IEnumerable<short?> values, bool enableZeroRemoving = false)
+    {
+        return values.Select(value => value.ToGuid(enableZeroRemoving));
+    }
+
+    /// <summary>
     ///     Convert Int32 to GUID
     /// </summary>
     /// <param name="value">Int32</param>
@@ -220,7 +420,17 @@ public static class Extension
     {
         return CreateGuid(BitConverter.GetBytes(value), enableZeroRemoving);
     }
-    
+
+    /// <summary>
+    ///     Convert IEnumerable Int32 to IEnumerable GUID
+    /// </summary>
+    /// <param name="values">Int32</param>
+    /// <param name="enableZeroRemoving">Enable Zero Removing</param>
+    public static IEnumerable<Guid> ToGuid(this IEnumerable<int> values, bool enableZeroRemoving = false)
+    {
+        return values.Select(value => value.ToGuid(enableZeroRemoving));
+    }
+
     /// <summary>
     ///     Convert Int32? to GUID?
     /// </summary>
@@ -232,6 +442,16 @@ public static class Extension
     }
 
     /// <summary>
+    ///     Convert IEnumerable Int32? to IEnumerable GUID?
+    /// </summary>
+    /// <param name="values">Int32</param>
+    /// <param name="enableZeroRemoving">Enable Zero Removing</param>
+    public static IEnumerable<Guid?> ToGuid(this IEnumerable<int?> values, bool enableZeroRemoving = false)
+    {
+        return values.Select(value => value.ToGuid(enableZeroRemoving));
+    }
+
+    /// <summary>
     ///     Convert Int64 to GUID
     /// </summary>
     /// <param name="value">Int64</param>
@@ -240,7 +460,17 @@ public static class Extension
     {
         return CreateGuid(BitConverter.GetBytes(value), enableZeroRemoving);
     }
-    
+
+    /// <summary>
+    ///     Convert IEnumerable Int64 to IEnumerable GUID
+    /// </summary>
+    /// <param name="values">Int64</param>
+    /// <param name="enableZeroRemoving">Enable Zero Removing</param>
+    public static IEnumerable<Guid> ToGuid(this IEnumerable<long> values, bool enableZeroRemoving = false)
+    {
+        return values.Select(value => value.ToGuid(enableZeroRemoving));
+    }
+
     /// <summary>
     ///     Convert Int64? to GUID?
     /// </summary>
@@ -252,6 +482,16 @@ public static class Extension
     }
 
     /// <summary>
+    ///     Convert IEnumerable Int64? to IEnumerable GUID?
+    /// </summary>
+    /// <param name="values">Int64</param>
+    /// <param name="enableZeroRemoving">Enable Zero Removing</param>
+    public static IEnumerable<Guid?> ToGuid(this IEnumerable<long?> values, bool enableZeroRemoving = false)
+    {
+        return values.Select(value => value.ToGuid(enableZeroRemoving));
+    }
+
+    /// <summary>
     ///     Convert UInt16 to GUID
     /// </summary>
     /// <param name="value">UInt16</param>
@@ -260,15 +500,35 @@ public static class Extension
     {
         return CreateGuid(BitConverter.GetBytes(value), enableZeroRemoving);
     }
-    
+
     /// <summary>
-    ///     Convert UInt16 to GUID
+    ///     Convert IEnumerable UInt16 to IEnumerable GUID
+    /// </summary>
+    /// <param name="values">UInt16</param>
+    /// <param name="enableZeroRemoving">Enable Zero Removing</param>
+    public static IEnumerable<Guid> ToGuid(this IEnumerable<ushort> values, bool enableZeroRemoving = false)
+    {
+        return values.Select(value => value.ToGuid(enableZeroRemoving));
+    }
+
+    /// <summary>
+    ///     Convert UInt16? to GUID?
     /// </summary>
     /// <param name="num">UInt16</param>
     /// <param name="enableZeroRemoving">Enable Zero Removing</param>
     public static Guid? ToGuid(this ushort? num, bool enableZeroRemoving = false)
     {
         return num.HasValue ? CreateGuid(BitConverter.GetBytes(num.Value), enableZeroRemoving) : null;
+    }
+
+    /// <summary>
+    ///     Convert IEnumerable UInt16? to IEnumerable GUID?
+    /// </summary>
+    /// <param name="values">UInt16</param>
+    /// <param name="enableZeroRemoving">Enable Zero Removing</param>
+    public static IEnumerable<Guid?> ToGuid(this IEnumerable<ushort?> values, bool enableZeroRemoving = false)
+    {
+        return values.Select(value => value.ToGuid(enableZeroRemoving));
     }
 
     /// <summary>
@@ -280,7 +540,17 @@ public static class Extension
     {
         return CreateGuid(BitConverter.GetBytes(value), enableZeroRemoving);
     }
-    
+
+    /// <summary>
+    ///     Convert IEnumerable UInt32 to IEnumerable GUID
+    /// </summary>
+    /// <param name="values">UInt32</param>
+    /// <param name="enableZeroRemoving">Enable Zero Removing</param>
+    public static IEnumerable<Guid> ToGuid(this IEnumerable<uint> values, bool enableZeroRemoving = false)
+    {
+        return values.Select(value => value.ToGuid(enableZeroRemoving));
+    }
+
     /// <summary>
     ///     Convert UInt32? to GUID?
     /// </summary>
@@ -292,6 +562,16 @@ public static class Extension
     }
 
     /// <summary>
+    ///     Convert IEnumerable UInt32? to IEnumerable GUID?
+    /// </summary>
+    /// <param name="values">UInt32</param>
+    /// <param name="enableZeroRemoving">Enable Zero Removing</param>
+    public static IEnumerable<Guid?> ToGuid(this IEnumerable<uint?> values, bool enableZeroRemoving = false)
+    {
+        return values.Select(value => value.ToGuid(enableZeroRemoving));
+    }
+
+    /// <summary>
     ///     Convert UInt64 to GUID
     /// </summary>
     /// <param name="value">UInt64</param>
@@ -300,7 +580,17 @@ public static class Extension
     {
         return CreateGuid(BitConverter.GetBytes(value), enableZeroRemoving);
     }
-    
+
+    /// <summary>
+    ///     Convert IEnumerable UInt64 to IEnumerable GUID
+    /// </summary>
+    /// <param name="values">UInt64</param>
+    /// <param name="enableZeroRemoving">Enable Zero Removing</param>
+    public static IEnumerable<Guid> ToGuid(this IEnumerable<ulong> values, bool enableZeroRemoving = false)
+    {
+        return values.Select(value => value.ToGuid(enableZeroRemoving));
+    }
+
     /// <summary>
     ///     Convert UInt64? to GUID?
     /// </summary>
@@ -312,6 +602,16 @@ public static class Extension
     }
 
     /// <summary>
+    ///     Convert IEnumerable UInt64? to IEnumerable GUID?
+    /// </summary>
+    /// <param name="values">UInt64</param>
+    /// <param name="enableZeroRemoving">Enable Zero Removing</param>
+    public static IEnumerable<Guid?> ToGuid(this IEnumerable<ulong?> values, bool enableZeroRemoving = false)
+    {
+        return values.Select(value => value.ToGuid(enableZeroRemoving));
+    }
+
+    /// <summary>
     ///     Convert Float to GUID
     /// </summary>
     /// <param name="value">Float</param>
@@ -320,7 +620,17 @@ public static class Extension
     {
         return CreateGuid(BitConverter.GetBytes(value), enableZeroRemoving);
     }
-    
+
+    /// <summary>
+    ///     Convert IEnumerable Float to IEnumerable GUID
+    /// </summary>
+    /// <param name="values">Float</param>
+    /// <param name="enableZeroRemoving">Enable Zero Removing</param>
+    public static IEnumerable<Guid> ToGuid(this IEnumerable<float> values, bool enableZeroRemoving = false)
+    {
+        return values.Select(value => value.ToGuid(enableZeroRemoving));
+    }
+
     /// <summary>
     ///     Convert Float? to GUID?
     /// </summary>
@@ -332,6 +642,16 @@ public static class Extension
     }
 
     /// <summary>
+    ///     Convert IEnumerable Float? to IEnumerable GUID?
+    /// </summary>
+    /// <param name="values">Float</param>
+    /// <param name="enableZeroRemoving">Enable Zero Removing</param>
+    public static IEnumerable<Guid?> ToGuid(this IEnumerable<float?> values, bool enableZeroRemoving = false)
+    {
+        return values.Select(value => value.ToGuid(enableZeroRemoving));
+    }
+
+    /// <summary>
     ///     Convert Double to GUID
     /// </summary>
     /// <param name="value">Double</param>
@@ -340,7 +660,17 @@ public static class Extension
     {
         return CreateGuid(BitConverter.GetBytes(value), enableZeroRemoving);
     }
-    
+
+    /// <summary>
+    ///     Convert IEnumerable Double to IEnumerable GUID
+    /// </summary>
+    /// <param name="values">Double</param>
+    /// <param name="enableZeroRemoving">Enable Zero Removing</param>
+    public static IEnumerable<Guid> ToGuid(this IEnumerable<double> values, bool enableZeroRemoving = false)
+    {
+        return values.Select(value => value.ToGuid(enableZeroRemoving));
+    }
+
     /// <summary>
     ///     Convert Double? to GUID?
     /// </summary>
@@ -352,12 +682,31 @@ public static class Extension
     }
 
     /// <summary>
+    ///     Convert IEnumerable Double? to IEnumerable GUID?
+    /// </summary>
+    /// <param name="values">Double</param>
+    /// <param name="enableZeroRemoving">Enable Zero Removing</param>
+    public static IEnumerable<Guid?> ToGuid(this IEnumerable<double?> values, bool enableZeroRemoving = false)
+    {
+        return values.Select(value => value.ToGuid(enableZeroRemoving));
+    }
+
+    /// <summary>
     ///     Convert String to GUID
     /// </summary>
     /// <param name="value">String</param>
     public static Guid ToGuidFromString(this string value)
     {
         return CreateGuid(new Guid(value).ToByteArray());
+    }
+
+    /// <summary>
+    ///     Convert IEnumerable String to IEnumerable GUID
+    /// </summary>
+    /// <param name="values">String</param>
+    public static IEnumerable<Guid> ToGuidFromString(this IEnumerable<string> values)
+    {
+        return values.Select(value => value.ToGuidFromString());
     }
 
     /// <summary>
