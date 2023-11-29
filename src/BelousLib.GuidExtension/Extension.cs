@@ -378,7 +378,7 @@ public static class Extension
     /// <param name="enableZeroRemoving">Enable Zero Removing</param>
     public static Guid ToGuid(this short value, bool enableZeroRemoving = false)
     {
-        return CreateGuid(BitConverter.GetBytes(value), enableZeroRemoving);
+        return ToCreateGuid(BitConverter.GetBytes(value), enableZeroRemoving);
     }
 
     /// <summary>
@@ -398,7 +398,7 @@ public static class Extension
     /// <param name="enableZeroRemoving">Enable Zero Removing</param>
     public static Guid? ToGuid(this short? num, bool enableZeroRemoving = false)
     {
-        return num.HasValue ? CreateGuid(BitConverter.GetBytes(num.Value), enableZeroRemoving) : null;
+        return num.HasValue ? ToCreateGuid(BitConverter.GetBytes(num.Value), enableZeroRemoving) : null;
     }
 
     /// <summary>
@@ -418,7 +418,7 @@ public static class Extension
     /// <param name="enableZeroRemoving">Enable Zero Removing</param>
     public static Guid ToGuid(this int value, bool enableZeroRemoving = false)
     {
-        return CreateGuid(BitConverter.GetBytes(value), enableZeroRemoving);
+        return ToCreateGuid(BitConverter.GetBytes(value), enableZeroRemoving);
     }
 
     /// <summary>
@@ -438,7 +438,7 @@ public static class Extension
     /// <param name="enableZeroRemoving">Enable Zero Removing</param>
     public static Guid? ToGuid(this int? num, bool enableZeroRemoving = false)
     {
-        return num.HasValue ? CreateGuid(BitConverter.GetBytes(num.Value), enableZeroRemoving) : null;
+        return num.HasValue ? ToCreateGuid(BitConverter.GetBytes(num.Value), enableZeroRemoving) : null;
     }
 
     /// <summary>
@@ -458,7 +458,7 @@ public static class Extension
     /// <param name="enableZeroRemoving">Enable Zero Removing</param>
     public static Guid ToGuid(this long value, bool enableZeroRemoving = false)
     {
-        return CreateGuid(BitConverter.GetBytes(value), enableZeroRemoving);
+        return ToCreateGuid(BitConverter.GetBytes(value), enableZeroRemoving);
     }
 
     /// <summary>
@@ -478,7 +478,7 @@ public static class Extension
     /// <param name="enableZeroRemoving">Enable Zero Removing</param>
     public static Guid? ToGuid(this long? num, bool enableZeroRemoving = false)
     {
-        return num.HasValue ? CreateGuid(BitConverter.GetBytes(num.Value), enableZeroRemoving) : null;
+        return num.HasValue ? ToCreateGuid(BitConverter.GetBytes(num.Value), enableZeroRemoving) : null;
     }
 
     /// <summary>
@@ -498,7 +498,7 @@ public static class Extension
     /// <param name="enableZeroRemoving">Enable Zero Removing</param>
     public static Guid ToGuid(this ushort value, bool enableZeroRemoving = false)
     {
-        return CreateGuid(BitConverter.GetBytes(value), enableZeroRemoving);
+        return ToCreateGuid(BitConverter.GetBytes(value), enableZeroRemoving);
     }
 
     /// <summary>
@@ -518,7 +518,7 @@ public static class Extension
     /// <param name="enableZeroRemoving">Enable Zero Removing</param>
     public static Guid? ToGuid(this ushort? num, bool enableZeroRemoving = false)
     {
-        return num.HasValue ? CreateGuid(BitConverter.GetBytes(num.Value), enableZeroRemoving) : null;
+        return num.HasValue ? ToCreateGuid(BitConverter.GetBytes(num.Value), enableZeroRemoving) : null;
     }
 
     /// <summary>
@@ -538,7 +538,7 @@ public static class Extension
     /// <param name="enableZeroRemoving">Enable Zero Removing</param>
     public static Guid ToGuid(this uint value, bool enableZeroRemoving = false)
     {
-        return CreateGuid(BitConverter.GetBytes(value), enableZeroRemoving);
+        return ToCreateGuid(BitConverter.GetBytes(value), enableZeroRemoving);
     }
 
     /// <summary>
@@ -558,7 +558,7 @@ public static class Extension
     /// <param name="enableZeroRemoving">Enable Zero Removing</param>
     public static Guid? ToGuid(this uint? num, bool enableZeroRemoving = false)
     {
-        return num.HasValue ? CreateGuid(BitConverter.GetBytes(num.Value), enableZeroRemoving) : null;
+        return num.HasValue ? ToCreateGuid(BitConverter.GetBytes(num.Value), enableZeroRemoving) : null;
     }
 
     /// <summary>
@@ -578,7 +578,7 @@ public static class Extension
     /// <param name="enableZeroRemoving">Enable Zero Removing</param>
     public static Guid ToGuid(this ulong value, bool enableZeroRemoving = false)
     {
-        return CreateGuid(BitConverter.GetBytes(value), enableZeroRemoving);
+        return ToCreateGuid(BitConverter.GetBytes(value), enableZeroRemoving);
     }
 
     /// <summary>
@@ -598,7 +598,7 @@ public static class Extension
     /// <param name="enableZeroRemoving">Enable Zero Removing</param>
     public static Guid? ToGuid(this ulong? num, bool enableZeroRemoving = false)
     {
-        return num.HasValue ? CreateGuid(BitConverter.GetBytes(num.Value), enableZeroRemoving) : null;
+        return num.HasValue ? ToCreateGuid(BitConverter.GetBytes(num.Value), enableZeroRemoving) : null;
     }
 
     /// <summary>
@@ -618,7 +618,7 @@ public static class Extension
     /// <param name="enableZeroRemoving">Enable Zero Removing</param>
     public static Guid ToGuid(this float value, bool enableZeroRemoving = false)
     {
-        return CreateGuid(BitConverter.GetBytes(value), enableZeroRemoving);
+        return ToCreateGuid(BitConverter.GetBytes(value), enableZeroRemoving);
     }
 
     /// <summary>
@@ -638,7 +638,7 @@ public static class Extension
     /// <param name="enableZeroRemoving">Enable Zero Removing</param>
     public static Guid? ToGuid(this float? num, bool enableZeroRemoving = false)
     {
-        return num.HasValue ? CreateGuid(BitConverter.GetBytes(num.Value), enableZeroRemoving) : null;
+        return num.HasValue ? ToCreateGuid(BitConverter.GetBytes(num.Value), enableZeroRemoving) : null;
     }
 
     /// <summary>
@@ -658,7 +658,7 @@ public static class Extension
     /// <param name="enableZeroRemoving">Enable Zero Removing</param>
     public static Guid ToGuid(this double value, bool enableZeroRemoving = false)
     {
-        return CreateGuid(BitConverter.GetBytes(value), enableZeroRemoving);
+        return ToCreateGuid(BitConverter.GetBytes(value), enableZeroRemoving);
     }
 
     /// <summary>
@@ -678,7 +678,7 @@ public static class Extension
     /// <param name="enableZeroRemoving">Enable Zero Removing</param>
     public static Guid? ToGuid(this double? num, bool enableZeroRemoving = false)
     {
-        return num.HasValue ? CreateGuid(BitConverter.GetBytes(num.Value), enableZeroRemoving) : null;
+        return num.HasValue ? ToCreateGuid(BitConverter.GetBytes(num.Value), enableZeroRemoving) : null;
     }
 
     /// <summary>
@@ -697,7 +697,7 @@ public static class Extension
     /// <param name="value">String</param>
     public static Guid ToGuidFromString(this string value)
     {
-        return CreateGuid(new Guid(value).ToByteArray());
+        return ToCreateGuid(new Guid(value).ToByteArray());
     }
 
     /// <summary>
@@ -714,27 +714,27 @@ public static class Extension
     /// </summary>
     /// <param name="byteArray">Byte array</param>
     /// <param name="enableZeroRemoving">Flag to enable zero removing</param>
-    private static Guid CreateGuid(byte[] byteArray, bool enableZeroRemoving = false)
+    private static Guid ToCreateGuid(byte[] byteArray, bool enableZeroRemoving = false)
     {
         // Initialize the remaining bytes of the Guid with zeros
         var guidBytes = new byte[16];
 
         Array.Copy(byteArray, guidBytes, byteArray.Length);
 
-        return !enableZeroRemoving ? new Guid(guidBytes) : FillGuid(new Guid(guidBytes));
+        return !enableZeroRemoving ? new Guid(guidBytes) : ToFillGuid(new Guid(guidBytes));
     }
 
     /// <summary>
     ///     Fill guid
     /// </summary>
     /// <param name="newGuid">GUID</param>
-    private static Guid FillGuid(Guid newGuid)
+    private static Guid ToFillGuid(Guid newGuid)
     {
         var charArray = newGuid.ToStringFromGuidWithoutDashes().ToCharArray();
 
         for (var index = LastGuidDigitIndex + 1; index < charArray.Length; index++)
         {
-            charArray[index] = GetRandomHexDigit();
+            charArray[index] = ToGetRandomHexDigit();
         }
 
         return new Guid(new string(charArray));
@@ -743,5 +743,6 @@ public static class Extension
     /// <summary>
     ///     Return a random value from HEX
     /// </summary>
-    private static char GetRandomHexDigit() => Hex[new Random().Next(16)];
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Security", "CA5394:Do not use insecure randomness", Justification = "<Pending>")]
+    private static char ToGetRandomHexDigit() => Hex[new Random().Next(16)];
 }

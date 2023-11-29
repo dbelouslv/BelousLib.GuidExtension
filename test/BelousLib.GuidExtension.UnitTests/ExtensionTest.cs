@@ -83,7 +83,7 @@ public class ExtensionTest
     }
 
     [Fact]
-    public void RandomGuidSuccess()
+    public void ToRandomGuidSuccess()
     {
         Assert.Equal(4666210788896725816, new Guid("6748db38-b5fd-40c1-8066-c0a0f1733377").ToInt64());
     }

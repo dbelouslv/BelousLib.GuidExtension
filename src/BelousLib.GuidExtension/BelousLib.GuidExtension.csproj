@@ -8,7 +8,7 @@
     <IsPackable>true</IsPackable>
 
     <PackageId>BelousLib.GuidExtension</PackageId>
-    <Version>2.0.0</Version>
+    <Version>2.1.0</Version>
     <Authors>Denis Belous</Authors>
     <Description>This library helps convert GUIDs to int/long/short/float/double and vice versa</Description>
     <PackageProjectUrl>https://github.com/dbelouslv/BelousLib.GuidExtension</PackageProjectUrl>
@@ -17,9 +17,63 @@
     <PackageTags>dotnet guid extension</PackageTags>
     <PackageReadmeFile>NUGET.md</PackageReadmeFile>
     <PackageReleaseNotes>
-      This is the release notes for version 2.0.0:
+      This is the release notes for version 2.1.0:
 
-      - Upgraded to .NET8
+      - Added nullable support for GUID? to Int16?
+      - Added nullable support for GUID? to Int32?
+      - Added nullable support for GUID? to Int64?
+      - Added nullable support for GUID? to UInt16?
+      - Added nullable support for GUID? to UInt32?
+      - Added nullable support for GUID? to UInt64?
+      - Added nullable support for GUID? to Float?
+      - Added nullable support for GUID? to Double?
+      - Added nullable support for GUID? to String?
+      - Added nullable support for GUID? to String? without dashes
+      - Added nullable support for Int16? to GUID?
+      - Added nullable support for Int32? to GUID?
+      - Added nullable support for Int64? to GUID?
+      - Added nullable support for UInt16? to GUID?
+      - Added nullable support for UInt32? to GUID?
+      - Added nullable support for UInt64? to GUID?
+      - Added nullable support for Float? to GUID?
+      - Added nullable support for Double? to GUID?
+      - Added IEnumerable GUID to IEnumerable Int16
+      - Added IEnumerable GUID? to IEnumerable Int16?
+      - Added IEnumerable GUID to IEnumerable Int32
+      - Added IEnumerable GUID? to IEnumerable Int32?
+      - Added IEnumerable GUID to IEnumerable Int64
+      - Added IEnumerable GUID? to IEnumerable Int64?
+      - Added IEnumerable GUID to IEnumerable UInt16
+      - Added IEnumerable GUID? to IEnumerable UInt16?
+      - Added IEnumerable GUID to IEnumerable UInt32
+      - Added IEnumerable GUID? to IEnumerable UInt32?
+      - Added IEnumerable GUID to IEnumerable UInt64
+      - Added IEnumerable GUID? to IEnumerable UInt64?
+      - Added IEnumerable GUID to IEnumerable Float
+      - Added IEnumerable GUID? to IEnumerable Float?
+      - Added IEnumerable GUID to IEnumerable Double
+      - Added IEnumerable GUID? to IEnumerable Double?
+      - Added IEnumerable GUID to IEnumerable String
+      - Added IEnumerable GUID? to IEnumerable String?
+      - Added IEnumerable GUID to IEnumerable String without dashes
+      - Added IEnumerable GUID? to IEnumerable String? without dashes
+      - Added IEnumerable Int16 to IEnumerable GUID
+      - Added IEnumerable Int16? to IEnumerable GUID?
+      - Added IEnumerable Int32 to IEnumerable GUID
+      - Added IEnumerable Int32? to IEnumerable GUID?
+      - Added IEnumerable Int64 to IEnumerable GUID
+      - Added IEnumerable Int64? to IEnumerable GUID?
+      - Added IEnumerable UInt16 to IEnumerable GUID
+      - Added IEnumerable UInt16? to IEnumerable GUID?
+      - Added IEnumerable UInt32 to IEnumerable GUID
+      - Added IEnumerable UInt32? to IEnumerable GUID?
+      - Added IEnumerable UInt64 to IEnumerable GUID
+      - Added IEnumerable UInt64? to IEnumerable GUID?
+      - Added IEnumerable Float to IEnumerable GUID
+      - Added IEnumerable Float? to IEnumerable GUID?
+      - Added IEnumerable Double to IEnumerable GUID
+      - Added IEnumerable Double? to IEnumerable GUID?
+      - Added IEnumerable String to IEnumerable GUID
     </PackageReleaseNotes>
 
     <AnalysisLevel>latest-all</AnalysisLevel>
@@ -27,7 +81,7 @@
     <Company></Company>
     <Copyright></Copyright>
     <DebugType>embedded</DebugType>
-    <AssemblyVersion>2.0.0</AssemblyVersion>
+    <AssemblyVersion>2.1.0</AssemblyVersion>
     <FileVersion>$(AssemblyVersion)</FileVersion>
     <Version>$(AssemblyVersion)</Version>
 
