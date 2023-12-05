@@ -1,4 +1,6 @@
-﻿namespace BelousLib.GuidExtension;
+﻿using System.Security.Cryptography;
+
+namespace BelousLib.GuidExtension;
 
 /// <summary>
 ///     Guid Extension
@@ -731,10 +733,11 @@ public static class Extension
     private static Guid ToFillGuid(Guid newGuid)
     {
         var charArray = newGuid.ToStringFromGuidWithoutDashes().ToCharArray();
+        var generatedHex = GenerateRandomString(charArray.Length - LastGuidDigitIndex + 1);
 
         for (var index = LastGuidDigitIndex + 1; index < charArray.Length; index++)
         {
-            charArray[index] = ToGetRandomHexDigit();
+            charArray[index] = generatedHex[charArray.Length - index];
         }
 
         return new Guid(new string(charArray));
@@ -743,6 +746,27 @@ public static class Extension
     /// <summary>
     ///     Return a random value from HEX
     /// </summary>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Security", "CA5394:Do not use insecure randomness", Justification = "<Pending>")]
-    private static char ToGetRandomHexDigit() => Hex[new Random().Next(16)];
+    /// <param name="length">Length</param>
+    private static string GenerateRandomString(int length)
+    {
+        if (length <= 0)
+        {
+            throw new ArgumentException("Invalid arguments for generating a random string.");
+        }
+
+        byte[] randomBytes = new byte[length];
+        using (RandomNumberGenerator rng = RandomNumberGenerator.Create())
+        {
+            rng.GetBytes(randomBytes);
+        }
+
+        char[] randomChars = new char[length];
+        for (int i = 0; i < length; i++)
+        {
+            int randomIndex = randomBytes[i] % Hex.Length;
+            randomChars[i] = Hex[randomIndex];
+        }
+
+        return new string(randomChars);
+    }
 }
