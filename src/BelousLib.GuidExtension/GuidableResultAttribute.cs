@@ -7,7 +7,8 @@ namespace BelousLib.GuidExtension
     /// <summary>
     ///     Set this filter only If you want to convert your 'Guidable' fields
     /// </summary>
-    public class GuidableFilter : IResultFilter
+    [AttributeUsage(AttributeTargets.Method)]
+    public sealed class GuidableResultAttribute : Attribute, IResultFilter
     {
         /// <summary>
         ///     On Result Executed
@@ -24,63 +25,72 @@ namespace BelousLib.GuidExtension
         /// <param name="context">Context</param>s
         public void OnResultExecuting(ResultExecutingContext? context)
         {
-            if (context?.Result is not OkObjectResult okObjectResult) 
+            if (context?.Result is not OkObjectResult okObjectResult)
+            {
                 return;
+            }
+
+            var newResult = new Dictionary<string, dynamic?>();
 
             foreach (var property in okObjectResult.Value.GetType().GetProperties())
             {
-                if (!property.CanWrite || property.GetIndexParameters().Length != 0 ||
-                    property.GetCustomAttribute<GuidableAttribute>() == null) 
-                    continue;
-
                 var value = property.GetValue(okObjectResult.Value);
+
+                if (!property.CanWrite || property.GetIndexParameters().Length != 0 || property.GetCustomAttribute<GuidableAttribute>() == null)
+                {
+                    newResult.Add(property.Name, value);
+                    continue;
+                }
 
                 //Skip if values is null
                 if (value is null)
+                {
+                    newResult.Add(property.Name, value);
                     continue;
+                }
 
                 switch (property.PropertyType.Name)
                 {
                     case "String":
-                        property.SetValue(okObjectResult.Value, ((string)value).ToGuidFromString());
+                        newResult.Add(property.Name, ((string)value).ToGuidFromString());
                         break;
 
                     case "Int16":
-                        property.SetValue(okObjectResult.Value, ((short)value).ToGuid());
+                        newResult.Add(property.Name, ((short)value).ToGuid());
                         break;
-                    
+
                     case "Int32":
-                        property.SetValue(okObjectResult.Value, ((int)value).ToGuid());
+                        newResult.Add(property.Name, ((int)value).ToGuid());
                         break;
-                    
+
                     case "Int64":
-                        property.SetValue(okObjectResult.Value, ((long)value).ToGuid());
+                        newResult.Add(property.Name, ((long)value).ToGuid());
                         break;
 
                     case "UInt16":
-                        property.SetValue(okObjectResult.Value, ((ushort)value).ToGuid());
+                        newResult.Add(property.Name, ((ushort)value).ToGuid());
                         break;
 
                     case "UInt32":
-                        property.SetValue(okObjectResult.Value, ((uint)value).ToGuid());
+                        newResult.Add(property.Name, ((uint)value).ToGuid());
                         break;
 
                     case "UInt64":
-                        property.SetValue(okObjectResult.Value, ((ulong)value).ToGuid());
+                        newResult.Add(property.Name, ((ulong)value).ToGuid());
                         break;
 
                     case "Double":
-                        property.SetValue(okObjectResult.Value, ((double)value).ToGuid());
+                        newResult.Add(property.Name, ((double)value).ToGuid());
                         break;
 
                     case "Single":
-                        property.SetValue(okObjectResult.Value, ((float)value).ToGuid());
+                        newResult.Add(property.Name, ((float)value).ToGuid());
                         break;
                 }
             }
 
             // Update the result with the modified model
-            context.Result = new OkObjectResult(okObjectResult.Value);
+            context.Result = new OkObjectResult(newResult);
         }
     }
 }

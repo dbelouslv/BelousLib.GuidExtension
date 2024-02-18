@@ -62,3 +62,64 @@ Please note that when converting, only the first 16 characters of the GUID are f
   //Output 6748db38-b5fd-40c1-0000-000000000000
   var withOutFlag = 4666210788896725816.ToGuid();
 ```
+
+# Guidable
+
+If you don't want to create new **DTO** models with **GUID** data type and use our `ToGuid()` method for multiple fields but still want to send **GUID** values to the front-end, we have created a new solution - `Guidable Attribute`.
+
+To achieve this, you need to specify the `[GuidableResult]` attribute for the **action**, and the fields that you want to convert to **GUID** should have the `[Guidable]` attribute. Example you can see below:
+
+```csharp
+using Microsoft.AspNetCore.Mvc;
+
+[Route("api/[controller]")]
+[ApiController]
+public class PersonController : BaseController
+{
+    //Contructor
+    
+    [HttpGet]
+    [GuidableResult]
+    public IActionResult Get()
+    {
+        var model = new PersonDTO()
+        {
+            Id = 32,
+            Age = 28,
+            PersonalId = 598938423,
+            Height = 533.1f
+        };
+        
+        return Ok(model);
+    }
+}
+
+//Output
+//{
+//  "Id": "00000020-0000-0000-0000-000000000000",
+//  "Age": 28,
+//  "PersonalId": "0eb851ec-d902-4156-0000-000000000000",
+//  "Height": 533.1
+//}
+
+```
+
+Here's an example of a model with fields annotated with the **Guidable** attribute. By default **EnableZeroRemoving ** is turn on, but you can disable it: `[Guidable(false)]`
+
+```csharp
+public class PersonDTO
+{
+    [Guidable(false)]
+    public int Id { get; set; }
+
+    public int Age { get; set; }
+
+    [Guidable]
+    public double PersonalId { get; set; }
+
+    public float Height { get; set; }
+}
+```
+
+**P.S. Currently, it doesn't work with collections.**
+

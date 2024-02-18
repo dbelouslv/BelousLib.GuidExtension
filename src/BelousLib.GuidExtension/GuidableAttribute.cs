@@ -3,8 +3,9 @@
     /// <summary>
     ///     Set this attribute only If you want to convert your field 'ToGuid()'
     /// </summary>
-    public class GuidableAttribute : Attribute
+    [AttributeUsage(AttributeTargets.Property)]
+    public sealed class GuidableAttribute(bool enableZeroRemoving = true) : Attribute
     {
-        //Set this attribute only If you want to convert your field 'ToGuid()'
+        public bool EnableZeroRemoving { get; } = enableZeroRemoving;
     }
 }
