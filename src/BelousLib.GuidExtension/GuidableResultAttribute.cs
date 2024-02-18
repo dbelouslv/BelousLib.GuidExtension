@@ -42,6 +42,8 @@ namespace BelousLib.GuidExtension
                     continue;
                 }
 
+                var enableZeroRemoving = property.GetCustomAttribute<GuidableAttribute>()?.EnableZeroRemoving ?? true;
+
                 //Skip if values is null
                 if (value is null)
                 {
@@ -56,35 +58,35 @@ namespace BelousLib.GuidExtension
                         break;
 
                     case "Int16":
-                        newResult.Add(property.Name, ((short)value).ToGuid());
+                        newResult.Add(property.Name, ((short)value).ToGuid(enableZeroRemoving));
                         break;
 
                     case "Int32":
-                        newResult.Add(property.Name, ((int)value).ToGuid());
+                        newResult.Add(property.Name, ((int)value).ToGuid(enableZeroRemoving));
                         break;
 
                     case "Int64":
-                        newResult.Add(property.Name, ((long)value).ToGuid());
+                        newResult.Add(property.Name, ((long)value).ToGuid(enableZeroRemoving));
                         break;
 
                     case "UInt16":
-                        newResult.Add(property.Name, ((ushort)value).ToGuid());
+                        newResult.Add(property.Name, ((ushort)value).ToGuid(enableZeroRemoving));
                         break;
 
                     case "UInt32":
-                        newResult.Add(property.Name, ((uint)value).ToGuid());
+                        newResult.Add(property.Name, ((uint)value).ToGuid(enableZeroRemoving));
                         break;
 
                     case "UInt64":
-                        newResult.Add(property.Name, ((ulong)value).ToGuid());
+                        newResult.Add(property.Name, ((ulong)value).ToGuid(enableZeroRemoving));
                         break;
 
                     case "Double":
-                        newResult.Add(property.Name, ((double)value).ToGuid());
+                        newResult.Add(property.Name, ((double)value).ToGuid(enableZeroRemoving));
                         break;
 
                     case "Single":
-                        newResult.Add(property.Name, ((float)value).ToGuid());
+                        newResult.Add(property.Name, ((float)value).ToGuid(enableZeroRemoving));
                         break;
                 }
             }

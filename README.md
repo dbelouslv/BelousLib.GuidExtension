@@ -98,13 +98,13 @@ public class PersonController : BaseController
 //{
 //  "Id": "00000020-0000-0000-0000-000000000000",
 //  "Age": 28,
-//  "PersonalId": "0eb851ec-d902-4156-0000-000000000000",
+//  "PersonalId": "0eb851ec-d902-4156-60c1-0194cc4e667f",
 //  "Height": 533.1
 //}
 
 ```
 
-Here's an example of a model with fields annotated with the **Guidable** attribute. By default **EnableZeroRemoving ** is turn on, but you can disable it: `[Guidable(false)]`
+Here's an example of a model with fields annotated with the **Guidable** attribute. By default **EnableZeroRemoving** is turn on, but you can disable it: `[Guidable(false)]`
 
 ```csharp
 public class PersonDTO
