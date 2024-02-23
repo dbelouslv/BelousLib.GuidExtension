@@ -49,64 +49,103 @@ namespace BelousLib.GuidExtension
 
             foreach (var property in item.GetType().GetProperties())
             {
-                var value = property.GetValue(item);
-
-                if (!property.CanWrite || property.GetIndexParameters().Length != 0 || property.GetCustomAttribute<GuidableAttribute>() == null)
+                if (property.PropertyType != typeof(string) && property.PropertyType.IsClass)
                 {
-                    items.Add(property.Name, value);
-                    continue;
+                    items.Add(property.Name, HandleItem(property.GetType().GetProperties()));
                 }
-
-                var enableZeroRemoving = property.GetCustomAttribute<GuidableAttribute>()?.EnableZeroRemoving ?? true;
-
-                //Skip if values is null
-                if (value is null)
+                else if (property.PropertyType != typeof(string) && IsList(property))
                 {
-                    items.Add(property.Name, value);
-                    continue;
+                    var elementType = property.PropertyType.GetGenericArguments().First();
+
+                    if (elementType != typeof(string) && elementType.IsClass)
+                    {
+                        items.Add(property.Name, GetObjectValues(item, property));
+                    }
+                    else
+                    {
+                        items.Add(property.Name, GetValues(item, property));
+                    }
                 }
-
-                switch (property.PropertyType.Name)
+                else
                 {
-                    case "String":
-                        items.Add(property.Name, ((string)value).ToGuidFromString());
-                        break;
-
-                    case "Int16":
-                        items.Add(property.Name, ((short)value).ToGuid(enableZeroRemoving));
-                        break;
-
-                    case "Int32":
-                        items.Add(property.Name, ((int)value).ToGuid(enableZeroRemoving));
-                        break;
-
-                    case "Int64":
-                        items.Add(property.Name, ((long)value).ToGuid(enableZeroRemoving));
-                        break;
-
-                    case "UInt16":
-                        items.Add(property.Name, ((ushort)value).ToGuid(enableZeroRemoving));
-                        break;
-
-                    case "UInt32":
-                        items.Add(property.Name, ((uint)value).ToGuid(enableZeroRemoving));
-                        break;
-
-                    case "UInt64":
-                        items.Add(property.Name, ((ulong)value).ToGuid(enableZeroRemoving));
-                        break;
-
-                    case "Double":
-                        items.Add(property.Name, ((double)value).ToGuid(enableZeroRemoving));
-                        break;
-
-                    case "Single":
-                        items.Add(property.Name, ((float)value).ToGuid(enableZeroRemoving));
-                        break;
+                    items.Add(property.Name, GetValue(item, property));
                 }
             }
 
             return items;
+        }
+
+        private static List<dynamic?> GetObjectValues(object item, PropertyInfo property)
+        {
+            return ((IEnumerable)property.GetValue(item)).Cast<object>().Select(subItem => HandleItem(subItem)).Cast<dynamic?>().ToList();
+        }
+
+        private static List<dynamic?> GetValues(object item, PropertyInfo property)
+        {
+            var values = new List<dynamic?>();
+
+            if (property.GetCustomAttribute<GuidableAttribute>() is not null)
+            {
+                var enableZeroRemoving = property.GetCustomAttribute<GuidableAttribute>()?.EnableZeroRemoving ?? true;
+
+                values.AddRange(((IEnumerable)property.GetValue(item)).Cast<dynamic>().Select(subItem => ConvertToGuid(subItem.GetType().Name, subItem, enableZeroRemoving)));
+            }
+            else
+            {
+                values.AddRange(((IEnumerable)property.GetValue(item)).Cast<dynamic>());
+            }
+
+            return values;
+        }
+
+        private static dynamic? GetValue(object item, PropertyInfo property)
+        {
+            var value = property.GetValue(item);
+
+            if (!property.CanWrite || property.GetIndexParameters().Length != 0 || property.GetCustomAttribute<GuidableAttribute>() == null)
+            {
+                return value;
+            }
+
+            var enableZeroRemoving = property.GetCustomAttribute<GuidableAttribute>()?.EnableZeroRemoving ?? true;
+
+            //Skip if values is null
+            return value is null ? value : ConvertToGuid(property.PropertyType.Name, value, enableZeroRemoving);
+        }
+
+        private static dynamic? ConvertToGuid(string propertyTypeName, object value, bool enableZeroRemoving)
+        {
+            return propertyTypeName switch
+            {
+                "String" => ((string)value).ToGuidFromString(),
+                "Int16" => ((short)value).ToGuid(enableZeroRemoving),
+                "Int32" => ((int)value).ToGuid(enableZeroRemoving),
+                "Int64" => ((long)value).ToGuid(enableZeroRemoving),
+                "UInt16" => ((ushort)value).ToGuid(enableZeroRemoving),
+                "UInt32" => ((uint)value).ToGuid(enableZeroRemoving),
+                "UInt64" => ((ulong)value).ToGuid(enableZeroRemoving),
+                "Double" => ((double)value).ToGuid(enableZeroRemoving),
+                "Single" => ((float)value).ToGuid(enableZeroRemoving),
+                _ => value
+            };
+        }
+
+        private static bool IsList(PropertyInfo propertyInfo)
+        {
+            // Check if the property type implements IEnumerable (non-generic)
+            if (typeof(IEnumerable).IsAssignableFrom(propertyInfo.PropertyType))
+            {
+                return true;
+            }
+
+            // Check if the property type implements IEnumerable<T> (generic)
+            var genericEnumerableInterface = propertyInfo.PropertyType
+                .GetInterfaces()
+                .FirstOrDefault(interfaceType =>
+                    interfaceType.IsGenericType &&
+                    interfaceType.GetGenericTypeDefinition() == typeof(IEnumerable<>));
+
+            return genericEnumerableInterface != null;
         }
     }
 }
