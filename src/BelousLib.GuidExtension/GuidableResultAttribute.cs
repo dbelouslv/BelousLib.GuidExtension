@@ -77,7 +77,7 @@ namespace BelousLib.GuidExtension
 
         private static List<dynamic?> GetObjectValues(object item, PropertyInfo property)
         {
-            return ((IEnumerable)property.GetValue(item)).Cast<object>().Select(subItem => HandleItem(subItem)).Cast<dynamic?>().ToList();
+            return property.GetValue(item) is null ? null : ((IEnumerable)property.GetValue(item)).Cast<object>().Select(subItem => HandleItem(subItem)).Cast<dynamic?>().ToList();
         }
 
         private static List<dynamic?> GetValues(object item, PropertyInfo property)
