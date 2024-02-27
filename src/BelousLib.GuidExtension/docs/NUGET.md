@@ -27,6 +27,10 @@ namespace Example
 
             //Output 6748db38b5fd40c18066c0a0f1733377
             Console.WriteLine(new Guid("6748db38-b5fd-40c1-8066-c0a0f1733377").ToStringFromGuidWithoutDashes());
+
+            //Output 33303530-3832-3534-4bf3-3ab132b2840a
+            //String -> ToGuid() only supports text up to 16 characters 
+            Console.WriteLine("0503284548482932".ToGuid(true));
         }
     }
 }
@@ -52,7 +56,7 @@ namespace Example
   
 ## Important
 
-Please note that when converting, only the first 16 characters of the GUID are filled with data, while the remaining values are left as zeros. Since it doesn't matter what will be in their place, the **enableZeroRemoving** flag was added to replace the zeros with any HEX values.
+Please note that when converting, only the first 16 characters of the GUID are filled with data, while the remaining values are left as zeros. Since it doesn't matter what will be in their place, the **enableZeroRemoving** flag was added to replace the zeros with any HEX values. Also when you want to convert **String -> ToGuid()** be careful that only supports text up to 16 characters. 
 
 ```csharp
   //Output 6748db38-b5fd-40c1-5a66-8f6a0e5c1c0b
@@ -81,44 +85,116 @@ public class PersonController : BaseController
     [GuidableResult]
     public IActionResult Get()
     {
-        var model = new PersonDTO()
+        var persons = new List<PersonDTO>()
         {
-            Id = 32,
-            Age = 28,
-            PersonalId = 598938423,
-            Height = 533.1f
+            new()
+            {
+                Id = 534,
+                Name = "Denis",
+                Age = 28,
+                Cards = new List<CardDTO>()
+                {
+                    new()
+                    {
+                        Balance = 599934.34,
+                        CardNumber = "0503259828482932"
+                    }
+                },
+                Kids = new List<PersonDTO>()
+                {
+                    new ()
+                    {
+                        Id = 642,
+                        Name = "Max",
+                        Age = 2,
+                        Cards = new List<CardDTO>(),
+                        Kids = null
+                    }
+                }
+            },
+
+            new ()
+            {
+                Id = 452,
+                Age = null,
+                Name = null,
+                Cards = new List<CardDTO>()
+                {
+                    new()
+                    {
+                        Balance = 54363646.63,
+                        CardNumber = "0503284548482932"
+                    }
+                },
+                Kids = null
+            }
         };
-        
-        return Ok(model);
+
+        return Ok(persons);
     }
 }
 
 //Output
-//{
-//  "Id": "00000020-0000-0000-0000-000000000000",
-//  "Age": 28,
-//  "PersonalId": "0eb851ec-d902-4156-60c1-0194cc4e667f",
-//  "Height": 533.1
-//}
+//[
+//  {
+//    "Id": "00000216-0000-0000-aff7-639ef5881baa",
+//    "Name": "Denis",
+//    "Age": 28,
+//    "Cards": [
+//      {
+//       "Balance": "ae147ae1-4efc-4122-0000-000000000000",
+//        "CardNumber": "33303530-3532-3839-2a4f-c91dd458c31c"
+//      }
+//    ],
+//    "Kids": [
+//      {
+//        "Id": "00000282-0000-0000-7e87-2669a65f893b",
+//        "Name": "Max",
+//        "Age": 2,
+//        "Cards": [],
+//        "Kids": null
+//      }
+//    ]
+//  },
+//  {
+//    "Id": "000001c4-0000-0000-bde0-d69a2fff596b",
+//    "Name": null,
+//    "Age": null,
+//    "Cards": [
+//      {
+//        "Balance": "f50a3d71-ec2f-4189-0000-000000000000",
+//        "CardNumber": "33303530-3832-3534-4bf3-3ab132b2840a"
+//      }
+//    ],
+//    "Kids": null
+//  }
+//]
 
 ```
 
 Here's an example of a model with fields annotated with the **Guidable** attribute. By default **EnableZeroRemoving** is turn on, but you can disable it: `[Guidable(false)]`
 
 ```csharp
-public class PersonDTO
-{
-    [Guidable(false)]
-    public int Id { get; set; }
+ public class PersonDTO
+    {
+        [Guidable]
+        public int Id { get; set; }
 
-    public int Age { get; set; }
+        public string? Name { get; set; }
 
-    [Guidable]
-    public double PersonalId { get; set; }
+        public int? Age { get; set; }
 
-    public float Height { get; set; }
-}
+        public IEnumerable<Card> Cards { get; set; }
+
+        public IEnumerable<Person>? Kids { get; set; }
+    }
+
+    public class CardDTO
+    {
+        [Guidable(false)]
+        public double Balance { get; set; }
+
+        [Guidable]
+        public string CardNumber { get; set; }
+    }
 ```
-
-**P.S. Currently, it doesn't work with collections.**
-
