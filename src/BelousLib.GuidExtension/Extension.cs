@@ -1,4 +1,5 @@
 ﻿using System.Security.Cryptography;
+using System.Text;
 
 namespace BelousLib.GuidExtension;
 
@@ -302,66 +303,66 @@ public static class Extension
     }
 
     /// <summary>
-    ///     Convert GUID to String
+    ///     Convert GUID to String GUID
     /// </summary>
     /// <param name="entityGuid">GUID</param>
-    public static string ToStringFromGuid(this Guid entityGuid)
+    public static string ToStringGuidFromGuid(this Guid entityGuid)
     {
         return entityGuid.ToString();
     }
 
     /// <summary>
-    ///     Convert IEnumerable GUID to IEnumerable String
+    ///     Convert IEnumerable GUID to IEnumerable String GUID
     /// </summary>
     /// <param name="guids">GUIDs</param>
-    public static IEnumerable<string> ToStringFromGuid(this IEnumerable<Guid> guids)
+    public static IEnumerable<string> ToStringGuidFromGuid(this IEnumerable<Guid> guids)
     {
-        return guids.Select(ToStringFromGuid);
+        return guids.Select(ToStringGuidFromGuid);
     }
 
     /// <summary>
-    ///     Convert GUID? to String?
+    ///     Convert GUID? to String GUID?
     /// </summary>
     /// <param name="entityGuid">GUID</param>
-    public static string? ToStringFromGuid(this Guid? entityGuid)
+    public static string? ToStringGuidFromGuid(this Guid? entityGuid)
     {
-        return entityGuid.HasValue ? entityGuid.Value.ToString() : null;
+        return entityGuid?.ToString();
     }
 
     /// <summary>
-    ///     Convert IEnumerable GUID? to IEnumerable String?
+    ///     Convert IEnumerable GUID? to IEnumerable String? GUID
     /// </summary>
     /// <param name="guids">GUIDs</param>
-    public static IEnumerable<string?> ToStringFromGuid(this IEnumerable<Guid?> guids)
+    public static IEnumerable<string?> ToStringGuidFromGuid(this IEnumerable<Guid?> guids)
     {
-        return guids.Select(ToStringFromGuid);
+        return guids.Select(ToStringGuidFromGuid);
     }
 
     /// <summary>
-    ///     Convert GUID to String without dashes
+    ///     Convert GUID to String GUID without dashes
     /// </summary>
     /// <param name="entityGuid">GUID</param>
-    public static string ToStringFromGuidWithoutDashes(this Guid entityGuid)
+    public static string ToStringGuidFromGuidWithoutDashes(this Guid entityGuid)
     {
         return entityGuid.ToString().Replace(Dash, string.Empty, StringComparison.CurrentCulture);
     }
 
     /// <summary>
-    ///     Convert IEnumerable GUID to IEnumerable String without dashes
+    ///     Convert IEnumerable GUID to IEnumerable String GUID without dashes
     /// </summary>
     /// <param name="guids">GUIDs</param>
-    public static IEnumerable<string> ToStringFromGuidWithoutDashes(this IEnumerable<Guid> guids)
+    public static IEnumerable<string> ToStringGuidFromGuidWithoutDashes(this IEnumerable<Guid> guids)
     {
-        return guids.Select(ToStringFromGuidWithoutDashes);
+        return guids.Select(ToStringGuidFromGuidWithoutDashes);
     }
 
     /// <summary>
     ///     Convert GUID? to String? without dashes
     /// </summary>
     /// <param name="entityGuid">GUID</param>
-    public static string? ToStringFromGuidWithoutDashes(this Guid? entityGuid)
+    public static string? ToStringGuidFromGuidWithoutDashes(this Guid? entityGuid)
     {
-        return entityGuid.HasValue ? entityGuid.Value.ToString().Replace(Dash, string.Empty, StringComparison.CurrentCulture) : null;
+        return entityGuid?.ToString().Replace(Dash, string.Empty, StringComparison.CurrentCulture);
     }
 
     /// <summary>
@@ -370,7 +371,7 @@ public static class Extension
     /// <param name="guids">GUIDs</param>
     public static IEnumerable<string?> ToStringFromGuidWithoutDashes(this IEnumerable<Guid?> guids)
     {
-        return guids.Select(ToStringFromGuidWithoutDashes);
+        return guids.Select(ToStringGuidFromGuidWithoutDashes);
     }
 
     /// <summary>
@@ -694,21 +695,86 @@ public static class Extension
     }
 
     /// <summary>
-    ///     Convert String to GUID
+    ///     Convert String GUID to GUID
     /// </summary>
     /// <param name="value">String</param>
-    public static Guid ToGuidFromString(this string value)
+    public static Guid ToGuidFromStringGuid(this string value)
     {
         return ToCreateGuid(new Guid(value).ToByteArray());
     }
 
     /// <summary>
-    ///     Convert IEnumerable String to IEnumerable GUID
+    ///     Convert IEnumerable String GUID to IEnumerable GUID
     /// </summary>
     /// <param name="values">String</param>
-    public static IEnumerable<Guid> ToGuidFromString(this IEnumerable<string> values)
+    public static IEnumerable<Guid> ToGuidFromStringGuid(this IEnumerable<string> values)
     {
-        return values.Select(value => value.ToGuidFromString());
+        return values.Select(value => value.ToGuidFromStringGuid());
+    }
+
+    /// <summary>
+    ///     Convert String to GUID.
+    ///     Only supports text up to 16 characters
+    /// </summary>
+    /// <param name="value">String</param>
+    /// <param name="enableZeroRemoving">Enable Zero Removing</param>
+    public static Guid? ToGuid(this string? value, bool enableZeroRemoving = false)
+    {
+        if (string.IsNullOrEmpty(value))
+        {
+            return null;
+        }
+
+        value = value.Length > 16 ? value[..15] : value;
+
+        return ToCreateGuid(Encoding.UTF8.GetBytes(value), enableZeroRemoving);
+    }
+
+    /// <summary>
+    ///     Convert IEnumerable String? to IEnumerable GUID?.
+    ///     Only supports text up to 16 characters
+    /// </summary>
+    /// <param name="values">IEnumerable String?</param>
+    /// <param name="enableZeroRemoving">Enable Zero Removing</param>
+    public static IEnumerable<Guid?> ToGuid(this IEnumerable<string?> values, bool enableZeroRemoving = false)
+    {
+        return values.Select(value => value.ToGuid(enableZeroRemoving));
+    }
+
+    /// <summary>
+    ///     Convert GUID to String
+    /// </summary>
+    /// <param name="entityGuid">GUID</param>
+    public static string ToStringFromGuid(this Guid entityGuid)
+    {
+        return Encoding.UTF8.GetString(entityGuid.ToByteArray());
+    }
+
+    /// <summary>
+    ///     Convert GUID? to String?
+    /// </summary>
+    /// <param name="entityGuid">GUID</param>
+    public static string? ToStringFromGuid(this Guid? entityGuid)
+    {
+        return entityGuid.HasValue ? Encoding.UTF8.GetString(entityGuid.Value.ToByteArray()) : null;
+    }
+
+    /// <summary>
+    ///     Convert IEnumerable GUID to IEnumerable String
+    /// </summary>
+    /// <param name="values">IEnumerable GUID</param>
+    public static IEnumerable<string> ToStringFromGuid(this IEnumerable<Guid> values)
+    {
+        return values.Select(value => value.ToStringFromGuid());
+    }
+
+    /// <summary>
+    ///     Convert IEnumerable GUID? to IEnumerable String?
+    /// </summary>
+    /// <param name="values">IEnumerable GUID?</param>
+    public static IEnumerable<string?> ToStringFromGuid(this IEnumerable<Guid?> values)
+    {
+        return values.Select(value => value.ToStringFromGuid());
     }
 
     /// <summary>
@@ -732,7 +798,7 @@ public static class Extension
     /// <param name="newGuid">GUID</param>
     private static Guid ToFillGuid(Guid newGuid)
     {
-        var charArray = newGuid.ToStringFromGuidWithoutDashes().ToCharArray();
+        var charArray = newGuid.ToStringGuidFromGuidWithoutDashes().ToCharArray();
         var generatedHex = GenerateRandomString(charArray.Length - LastGuidDigitIndex + 1);
 
         for (var index = LastGuidDigitIndex + 1; index < charArray.Length; index++)

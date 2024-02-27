@@ -65,26 +65,34 @@ public class ExtensionTest
     }
 
     [Fact]
-    public void ToStringFromGuidSuccess()
+    public void ToStringGuidFromGuidSuccess()
     {
-        Assert.Equal(new Guid("6748db38-b5fd-40c1-8066-c0a0f1733377").ToString(), new Guid("6748db38-b5fd-40c1-8066-c0a0f1733377").ToStringFromGuid());
+        Assert.Equal(new Guid("6748db38-b5fd-40c1-8066-c0a0f1733377").ToString(), new Guid("6748db38-b5fd-40c1-8066-c0a0f1733377").ToStringGuidFromGuid());
     }
 
     [Fact]
-    public void ToStringFromGuidWithoutDashesSuccess()
+    public void ToStringGuidFromGuidWithoutDashesSuccess()
     {
-        Assert.Equal("6748db38b5fd40c18066c0a0f1733377", new Guid("6748db38-b5fd-40c1-8066-c0a0f1733377").ToStringFromGuidWithoutDashes());
+        Assert.Equal("6748db38b5fd40c18066c0a0f1733377", new Guid("6748db38-b5fd-40c1-8066-c0a0f1733377").ToStringGuidFromGuidWithoutDashes());
     }
 
     [Fact]
-    public void ToGuidFromStringSuccess()
+    public void ToGuidFromStringGuidSuccess()
     {
-        Assert.Equal(new Guid("6748db38-b5fd-40c1-8066-c0a0f1733377"), "6748db38b5fd40c18066c0a0f1733377".ToGuidFromString());
+        Assert.Equal(new Guid("6748db38-b5fd-40c1-8066-c0a0f1733377"), "6748db38b5fd40c18066c0a0f1733377".ToGuidFromStringGuid());
     }
 
     [Fact]
     public void ToRandomGuidSuccess()
     {
         Assert.Equal(4666210788896725816, new Guid("6748db38-b5fd-40c1-8066-c0a0f1733377").ToInt64());
+    }
+
+    [Fact]
+    public void ToGuidFromStringSuccess()
+    {
+        const string title = "Universal Studio";
+
+        Assert.Equal(title, title.ToGuid().ToStringFromGuid());
     }
 }

@@ -117,7 +117,7 @@ namespace BelousLib.GuidExtension
         {
             return propertyTypeName switch
             {
-                "String" => ((string)value).ToGuidFromString(),
+                "String" => ((string)value).ToGuid(enableZeroRemoving),
                 "Int16" => ((short)value).ToGuid(enableZeroRemoving),
                 "Int32" => ((int)value).ToGuid(enableZeroRemoving),
                 "Int64" => ((long)value).ToGuid(enableZeroRemoving),
