@@ -8,7 +8,7 @@
     <IsPackable>true</IsPackable>
 
     <PackageId>BelousLib.GuidExtension</PackageId>
-    <Version>3.0.0</Version>
+    <Version>3.1.0</Version>
     <Authors>Denis Belous</Authors>
     <Description>This library helps convert GUIDs to int/long/short/float/double and vice versa</Description>
     <PackageProjectUrl>https://github.com/dbelouslv/BelousLib.GuidExtension</PackageProjectUrl>
@@ -17,11 +17,13 @@
     <PackageTags>dotnet guid extension</PackageTags>
     <PackageReadmeFile>NUGET.md</PackageReadmeFile>
     <PackageReleaseNotes>
-		This is the release notes for version 3.0.0:
+		This is the release notes for version 3.1.0:
 
-		- Added Guidable attribute to set for your fields
-		- Added Guidable filter to set for your controller
-        - Updated document to use Guidable logic
+		- Added support for simple collections when the collection is an object property
+		- Added support for object collections when the collection is an object property
+		- Added support for object collections
+		- Renamed old function ToGuidFromString to ToGuidFromStringGuid
+		- Added new function: FromGuidToString
 	</PackageReleaseNotes>
 
     <AnalysisLevel>latest-all</AnalysisLevel>
@@ -29,7 +31,7 @@
     <Company></Company>
     <Copyright></Copyright>
     <DebugType>embedded</DebugType>
-    <AssemblyVersion>3.0.0</AssemblyVersion>
+    <AssemblyVersion>3.1.0</AssemblyVersion>
     <FileVersion>$(AssemblyVersion)</FileVersion>
     <Version>$(AssemblyVersion)</Version>
 
