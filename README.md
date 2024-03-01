@@ -85,48 +85,39 @@ public class PersonController : BaseController
     [GuidableResult]
     public IActionResult Get()
     {
-        var persons = new List<PersonDTO>()
+        var persons = new List<PersonDTO>
         {
             new()
             {
-                Id = 534,
-                Name = "Denis",
+                Id = 1,
                 Age = 28,
-                Cards = new List<CardDTO>()
-                {
-                    new()
+                PersonalId = 598938423644,
+                Name = "Denis",
+                Pins = [4125, 7453],
+                Cards =
+                [
+                    new CardDTO
                     {
-                        Balance = 599934.34,
-                        CardNumber = "0503259828482932"
+                        Balance = 5923.42f,
+                        Number = "5302292329406953"
                     }
-                },
-                Kids = new List<PersonDTO>()
-                {
-                    new ()
-                    {
-                        Id = 642,
-                        Name = "Max",
-                        Age = 2,
-                        Cards = new List<CardDTO>(),
-                        Kids = null
-                    }
-                }
+                ]
             },
-
-            new ()
+            new()
             {
-                Id = 452,
-                Age = null,
-                Name = null,
-                Cards = new List<CardDTO>()
-                {
-                    new()
+                Id = 2,
+                Age = 24,
+                PersonalId = 598938423422,
+                Name = "Viktorija",
+                Pins = [4203, 5212],
+                Cards =
+                [
+                    new CardDTO
                     {
-                        Balance = 54363646.63,
-                        CardNumber = "0503284548482932"
+                        Balance = 15262.42f,
+                        Number = "5301192749406953"
                     }
-                },
-                Kids = null
+                ]
             }
         };
 
@@ -137,64 +128,66 @@ public class PersonController : BaseController
 //Output
 //[
 //  {
-//    "Id": "00000216-0000-0000-aff7-639ef5881baa",
+//    "Id": "00000001-0000-0000-0000-000000000000",
 //    "Name": "Denis",
 //    "Age": 28,
+//    "PersonalId": "622b8000-6e70-4261-62ae-70eafc3d7169",
+//    "Pins": [
+//      "0000101d-0000-0000-b197-884072decf66",
+//      "00001d1d-0000-0000-4799-1dfb77a405df"
+//    ],
 //    "Cards": [
 //      {
-//       "Balance": "ae147ae1-4efc-4122-0000-000000000000",
-//        "CardNumber": "33303530-3532-3839-2a4f-c91dd458c31c"
-//      }
-//    ],
-//    "Kids": [
-//      {
-//        "Id": "00000282-0000-0000-7e87-2669a65f893b",
-//        "Name": "Max",
-//        "Age": 2,
-//        "Cards": [],
-//        "Kids": null
+//        "Number": "32303335-3932-3332-6d53-ac43e6e3cd06",
+//        "Balance": 5923.42
 //      }
 //    ]
 //  },
 //  {
-//    "Id": "000001c4-0000-0000-bde0-d69a2fff596b",
-//    "Name": null,
-//    "Age": null,
+//    "Id": "00000002-0000-0000-0000-000000000000",
+//    "Name": "Viktorija",
+//    "Age": 24,
+//    "PersonalId": "620fc000-6e70-4261-b3c6-316d3e28a20b",
+//    "Pins": [
+//      "0000106b-0000-0000-3cc6-47761a264267",
+//      "0000145c-0000-0000-4df0-0a3fa7bc5ddb"
+//    ],
 //    "Cards": [
 //      {
-//        "Balance": "f50a3d71-ec2f-4189-0000-000000000000",
-//        "CardNumber": "33303530-3832-3534-4bf3-3ab132b2840a"
+//        "Number": "31303335-3931-3732-eafe-7ba344dc6141",
+//        "Balance": 15262.42
 //      }
-//    ],
-//    "Kids": null
+//    ]
 //  }
 //]
-
 ```
 
 Here's an example of a model with fields annotated with the **Guidable** attribute. By default **EnableZeroRemoving** is turn on, but you can disable it: `[Guidable(false)]`
 
 ```csharp
- public class PersonDTO
-    {
-        [Guidable]
-        public int Id { get; set; }
+public class PersonDTO
+{
+    [Guidable(false)]
+    public int Id { get; set; }
 
-        public string? Name { get; set; }
+    public string Name { get; set; }
 
-        public int? Age { get; set; }
+    public int Age { get; set; }
 
-        public IEnumerable<Card> Cards { get; set; }
+    [Guidable]
+    public double PersonalId { get; set; }
 
-        public IEnumerable<Person>? Kids { get; set; }
-    }
+    [Guidable]
+    public IEnumerable<int> Pins { get; set; } = [];
 
-    public class CardDTO
-    {
-        [Guidable(false)]
-        public double Balance { get; set; }
+    public IEnumerable<CardDTO> Cards { get; set; } = [];
+}
 
-        [Guidable]
-        public string CardNumber { get; set; }
-    }
+public class CardDTO
+{
+    [Guidable]
+    public string Number { get; set; }
+
+    public float Balance { get; set; }
+}
 ```
